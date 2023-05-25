@@ -13,6 +13,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
+        <th scope="col">Number of projects</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
       <tr>
         <td>{{$type->id}}</td>
         <td>{{$type->name}}</td>
+        <td>{{count($type->projects)}}</td>
         {{-- <td>
           <div class="d-flex gap-3">
 

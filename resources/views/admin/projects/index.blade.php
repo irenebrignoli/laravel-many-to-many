@@ -15,7 +15,7 @@
         <th scope="col">Title</th>
         <th scope="col">Image</th>
         <th scope="col">Type</th>
-        <th scope="col">Description</th>
+        <th scope="col"class="w-25">Description</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -26,17 +26,17 @@
         <td>{{$project->title}}</td>
         <td><img class="personal_img_sm" src="{{$project->image}}" alt=""></td>
         <td>{{$project->type?$project->type->name:'No type'}}</td>
-        <td class="text-wrap">{{substr($project->description, 0, 200,)}}...</td>
+        <td class="text-wrap">{{substr($project->description, 0, 100,)}}...</td>
         <td>
           <div class="d-flex gap-3">
 
-            <a class="btn btn-info"  href="{{route('admin.projects.show', ['project' => $project->slug])}}">Show</a>
-            <a class="btn btn-warning"  href="{{route('admin.projects.edit', ['project' => $project->slug])}}">Edit</a>
+            <a class="btn btn-outline-primary"  href="{{route('admin.projects.show', ['project' => $project->slug])}}">Show</a>
+            <a class="btn btn-outline-warning"  href="{{route('admin.projects.edit', ['project' => $project->slug])}}">Edit</a>
           
             <form class="form_delete_post" action="{{route('admin.projects.destroy', ['project' => $project->slug])}}" method="POST">
               @csrf
               @method('DELETE')
-              <button type="submit" class="btn btn-danger">Delete</button>
+              <button type="submit" class="btn btn-outline-dark">Delete</button>
             </form>
 
           </div>

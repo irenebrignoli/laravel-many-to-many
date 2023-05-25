@@ -55,7 +55,9 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Modify</button>
+
+        <button type="submit" class="btn btn-primary me-2">Modify</button>
+        <a class="btn btn-outline-primary" href="{{route('admin.projects.index')}}">Come back to list</a>
 
     </form>
 
