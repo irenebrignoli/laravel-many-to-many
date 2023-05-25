@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
@@ -29,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types','technologies'));
     }
 
     /**
@@ -51,6 +53,10 @@ class ProjectController extends Controller
         
         
         $newProject = Project::create($form_data);
+
+        if ($request->has('technologies')) {
+            $newProject->technologies()->attach($request->technologies);
+        }
 
         return redirect()->route('admin.projects.show', ['project' => $newProject->slug])->with('status', 'Project created!');
     }
@@ -75,7 +81,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -92,10 +99,13 @@ class ProjectController extends Controller
         $form_data['slug'] = Project::generateSlug( $request->title);
 
         $checkProject = Project::where('slug', $form_data['slug'])->where('id', '<>', $project->id)->first();
+
         if ($checkProject) {
             return back()->withInput()->withErrors(['slug' => 'Unable to create slug']);
         }
         
+        $project->technologies()->sync($request->technologies);
+
         $project -> update($form_data);
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug])->with('status', 'Project updated!');

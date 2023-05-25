@@ -29,7 +29,7 @@
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label for="type_id" class="form-label">Project type</label>
             <select class="form-select @error('type_id') is-invalid @enderror"  name="type_id" id="type_id">
                 <option  @selected(old('type_id', $project->type_id)=='') value="">No project type</option>
@@ -39,6 +39,25 @@
                 @endforeach
             </select>
             @error('type_id')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3 d-flex ">
+            @foreach($technologies as $technology)
+            <div class="ms_checkbox px-3">
+                @if ($errors->any())
+                    <input id="technology_{{$technology->id}}" @if (in_array($technology->id , old('technology', []))) checked @endif type="checkbox" name="technologies[]" value="{{$technology->id}}">
+                @else
+                    <input id="technology_{{$technology->id}}" @if ($project->technologies->contains($technology->id)) checked @endif type="checkbox" name="technologies[]" value="{{$technology->id}}">
+                @endif
+
+                <label for="technology_{{$technology->id}}"  class="form-label">{{$technology->name}}</label>
+            </div>
+            @endforeach
+            @error('technologies')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
