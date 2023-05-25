@@ -15,7 +15,8 @@
         <th scope="col">Title</th>
         <th scope="col">Image</th>
         <th scope="col">Type</th>
-        <th scope="col"class="w-25">Description</th>
+        <th scope="col"class="w-25">Technologies</th>
+        {{-- <th scope="col"class="w-25">Description</th> --}}
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -26,9 +27,14 @@
         <td>{{$project->title}}</td>
         <td><img class="personal_img_sm" src="{{$project->image}}" alt=""></td>
         <td>{{$project->type?$project->type->name:'No type'}}</td>
-        <td class="text-wrap">{{substr($project->description, 0, 100,)}}...</td>
         <td>
-          <div class="d-flex gap-3">
+          @foreach ( $project->technologies as $technology)
+           <span class="badge rounded-pill text-bg-success">{{$technology->name}}</span>
+          @endforeach
+        </td>
+        {{-- <td class="text-wrap">{{substr($project->description, 0, 100,)}}...</td> --}}
+        <td>
+          <div class="d-flex gap-2">
 
             <a class="btn btn-outline-primary"  href="{{route('admin.projects.show', ['project' => $project->slug])}}">Show</a>
             <a class="btn btn-outline-warning"  href="{{route('admin.projects.edit', ['project' => $project->slug])}}">Edit</a>
