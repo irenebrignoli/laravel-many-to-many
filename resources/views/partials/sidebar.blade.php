@@ -31,6 +31,13 @@
         Types
       </a>
     </li>
+    <li>
+      <a href="{{route('admin.technologies.index')}}" class="nav-link 
+      @guest text-black-50 @else text-dark @endauth
+      {{Route::currentRouteName() == 'admin.technologies.index'?'bg-secondary text-white':''}}">
+        Technologies
+      </a>
+    </li>
   </ul>
 </div>
   
