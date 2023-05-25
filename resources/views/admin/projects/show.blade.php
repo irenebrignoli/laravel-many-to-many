@@ -19,7 +19,8 @@
         <li class="list-group-item">Id: {{$project->id}}</li>
         <li class="list-group-item">Type: {{$project->type?$project->type->name:'No project type selected'}}</li>
         <li class="list-group-item">
-          @foreach ($project->$technologies as $technology)
+          <span>Technologies:</span>
+          @foreach ($project->technologies as $technology)
           <span class="badge rounded-pill text-bg-success">{{$technology->name}}</span>
           @endforeach
         </li>
