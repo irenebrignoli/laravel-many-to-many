@@ -7,6 +7,7 @@ use App\Models\Technology;
 use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -51,6 +52,10 @@ class ProjectController extends Controller
             return back()->withInput()->withErrors(['slug' => 'Unable to create slug for this project, please change the title']);
         }
         
+        if($request->hasFile('image')){
+            $path = Storage::put('cover_images', $request->image);
+            $form_data['image'] = $path;
+        }
         
         $newProject = Project::create($form_data);
 

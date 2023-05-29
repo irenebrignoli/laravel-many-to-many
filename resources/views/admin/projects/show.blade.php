@@ -7,7 +7,7 @@
 <div class="card mt-4 w-75">
 
   <div class="d-flex">
-    <img src="{{$project->image}}" class="personal_img_lg ">
+    <img src="{{asset('storage/'. $project->image)}}" class="personal_img_lg ">
 
     <div>
       <div class="card-body">

@@ -6,7 +6,7 @@
 
     <h2 class="fs-4 text-secondary my-4">Create new project</h2>
 
-    <form method="POST" action="{{ route('admin.projects.store') }}" >
+    <form method="POST" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
 
         @csrf
 
@@ -22,7 +22,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control @error('image') is-invalid @enderror " id="image" name="image" value="{{old('image')}}">
+            <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image" value="{{old('image')}}">
             @error('image')
                 <div class="invalid-feedback">
                     {{$message}}
