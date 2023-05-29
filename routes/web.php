@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('technologies', TechnologyController::class)->parameters([
             'technologies' => 'technology:slug'
         ])->only(['index']);
+        Route::get('projects/{slug}/deleteImage', [ProjectController::class, 'deleteImage'])->name('projects.deleteImage');
     });
 
 Route::middleware('auth')->group(function () {

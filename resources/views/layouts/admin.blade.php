@@ -24,7 +24,7 @@
 
         @include('partials.header')
 
-        <main>
+        <main class="mb-5">
             @if ($errors->any())
             <div class="error-message d-flex justify-content-center">
               <div class="alert alert-danger">

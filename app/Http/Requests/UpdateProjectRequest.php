@@ -29,7 +29,7 @@ class UpdateProjectRequest extends FormRequest
             //'image' => 'nullable|max:255|url',
             'description' => 'nullable',
             'type_id' => 'nullable|exists:types,id',
-            'technology_id' => 'exists:technologies,id',
+            'technologies' => 'exists:technologies,id',
             'image' => 'nullable|image|max:1500'
         ];
     }

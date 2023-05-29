@@ -10,10 +10,15 @@
     object-fit: cover;
 }
 
-.personal_img_lg {
+.ms_img_wrapper {
     width: 200px;
     height: 200px;
-    object-fit: cover;
+
+    .personal_img_lg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 .ms_checkbox:nth-child(even) {

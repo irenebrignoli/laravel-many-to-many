@@ -23,9 +23,14 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">Image:</label>
+
             @if ($project->image)
-                <img src="{{asset('storage/'. $project->image)}}" class="personal_img_lg mb-4 d-block">
+                <div class="position-relative ms_img_wrapper mb-4 ">
+                    <img src="{{asset('storage/'. $project->image)}}" class="personal_img_lg d-block">
+                    <a href="{{route('admin.projects.deleteImage', ['slug' => $project->slug])}}"class="btn btn-danger position-absolute  top-0 end-0">X</a>
+                </div>   
             @endif
+
             <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image">
             @error('image')
                 <div class="invalid-feedback">

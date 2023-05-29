@@ -114,7 +114,7 @@ class ProjectController extends Controller
             if($project->image){
                 Storage::delete($project->image);
             }
-            
+
             $path = Storage::put('cover_images', $request->image);
             $form_data['image'] = $path;
         }
@@ -134,7 +134,24 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if($project->image){
+            Storage::delete($project->image);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index');
+    }
+
+    public function deleteImage($slug) {
+
+        $project = Project::where('slug', $slug)->firstOrFail();
+
+        if ($project->image) {
+            Storage::delete($project->image);
+            $project->image = null;
+            $project->save();
+        }
+
+        return redirect()->route('admin.projects.edit', $project->slug);
     }
 }
