@@ -4,13 +4,15 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project->slug]) }}">
+    <h2 class="fs-4 text-secondary my-4">Modify project</h2>
+
+    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project->slug]) }}" enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Title:</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror " id="title" name="title" value="{{old('title', $project->title)}}">
             @error('title')
                 <div class="invalid-feedback">
@@ -20,8 +22,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control @error('image') is-invalid @enderror " id="image" name="image" value="{{old('image', $project->image)}}">
+            <label for="image" class="form-label">Image:</label>
+            @if ($project->image)
+                <img src="{{asset('storage/'. $project->image)}}" class="personal_img_lg mb-4 d-block">
+            @endif
+            <input type="file" class="form-control @error('image') is-invalid @enderror " id="image" name="image">
             @error('image')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -30,7 +35,7 @@
         </div>
 
         <div class="mb-4">
-            <label for="type_id" class="form-label">Project type</label>
+            <label for="type_id" class="form-label">Project type:</label>
             <select class="form-select @error('type_id') is-invalid @enderror"  name="type_id" id="type_id">
                 <option  @selected(old('type_id', $project->type_id)=='') value="">No project type</option>
                 @foreach ( $types as $type)
@@ -65,7 +70,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Description:</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{old('description', $project->description)}}</textarea>
             @error('description')
                 <div class="invalid-feedback">

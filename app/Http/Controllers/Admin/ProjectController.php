@@ -108,6 +108,16 @@ class ProjectController extends Controller
         if ($checkProject) {
             return back()->withInput()->withErrors(['slug' => 'Unable to create slug']);
         }
+
+        if($request->hasFile('image')){
+
+            if($project->image){
+                Storage::delete($project->image);
+            }
+            
+            $path = Storage::put('cover_images', $request->image);
+            $form_data['image'] = $path;
+        }
         
         $project->technologies()->sync($request->technologies);
 

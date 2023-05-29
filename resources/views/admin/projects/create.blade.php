@@ -70,7 +70,8 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary me-2">Save</button>
+        <a class="btn btn-outline-primary" href="{{route('admin.projects.index')}}">Come back to list</a>
 
     </form>
 

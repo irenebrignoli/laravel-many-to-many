@@ -20,12 +20,21 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
+
     <tbody>
       @foreach ( $projects as $project )
       <tr>
         <td>{{$project->id}}</td>
         <td>{{$project->title}}</td>
-        <td><img class="personal_img_sm" src="{{$project->image}}" alt=""></td>
+        <td>
+          @if($project->image)
+            <img class="personal_img_sm" src="{{asset('storage/'. $project->image)}}">
+          @else
+            <div>
+              <img class="personal_img_sm" src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png">
+            </div>
+          @endif
+        </td>
         <td>{{$project->type?$project->type->name:'No type'}}</td>
         <td>
           @foreach ( $project->technologies as $technology)
@@ -34,6 +43,8 @@
         </td>
         {{-- <td class="text-wrap">{{substr($project->description, 0, 100,)}}...</td> --}}
         <td>
+
+          {{-- action buttons --}}
           <div class="d-flex gap-2">
 
             <a class="btn btn-outline-primary"  href="{{route('admin.projects.show', ['project' => $project->slug])}}">Show</a>
